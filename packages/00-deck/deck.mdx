@@ -1,0 +1,247 @@
+import { CodeSurfer, CodeSurferColumns, Step } from "code-surfer";
+import { vsDark } from "@code-surfer/themes";
+
+export const theme = vsDark;
+
+# Server Side NodeJs
+
+## By Elias Hussary
+
+---
+
+## Agenda
+1. History of Node
+2. Strengths & Weaknesses
+3. Tour of Server Side Node
+    - stdlib http
+    - express
+    - async patterns
+4. Fullstack Javascript (SSR)
+5. Demo
+6. Scaling Node
+7. Questions
+
+---
+
+## History of Server Side Javascript & Node
+
+- Node was introduced in 2011 by Ryan Dahl
+- Built ontop of Google's V8 runtime (also offered on Chakra)
+- C++ bindings makeup the greater part of the NodeJS stdlib
+- Allows for general purpose programming
+- Great for I/O heavy applications
+
+---
+
+## Strengths & Weaknesses of NodeJs
+
+---
+
+### Weaknesses
+
+- Single threaded\*
+  - \*applications must be designed to operate in clusters
+- Slower than most other languages
+- Javascript is dynamically typed; 
+  - more prone to sloppy code and trivial errors
+  - use typescript
+- stdlib lacks in many ways, encourages the use of NPM
+- NPM
+  - code from these packages are sometimes questionable
+  - huge attack vector
+
+
+---
+
+### Strengths
+
+- Asynchronous by nature; 
+  - great for I/O driven applications (servers)
+- Full stack web applications now in Javascript
+  - great for MVPs and prototyping
+  - increases productivity, less context switching for devs
+  - faster dev time promoting iterative feedback loops early
+- Thriving package ecosystem via Node Package Manager (npm)
+- Allows for Server Side Rendered SPA's
+- NPM
+  - there is a module for everything
+
+---
+
+# A Tour of Node
+
+---
+
+<CodeSurfer>
+
+```ts title="stdlib http server" file="../1.0-stdlib-http/src/index.ts"
+```
+
+```diff 5:19
+
+```
+
+</CodeSurfer>
+
+---
+
+## Adding middleware
+
+---
+
+<CodeSurfer>
+
+```ts title="middleware app" subtitle="./app.ts" file="../1.1-with-middleware/src/app.ts"
+```
+
+```ts 5:28 file="../1.1-with-middleware/src/app.ts"
+```
+
+</CodeSurfer>
+
+---
+
+<CodeSurfer>
+
+```ts 9:33 title="stdlib http server with middleware" subtitle="./index.ts" file="../1.1-with-middleware/src/index.ts"
+```
+
+</CodeSurfer>
+
+---
+
+# Using Express
+
+---
+
+<CodeSurfer>
+
+```js title="express hello world" file="../2.0-express/src/index.ts"
+```
+
+```diff 7:22
+
+```
+
+</CodeSurfer>
+
+---
+
+# Async Patterns
+
+---
+
+<CodeSurfer>
+
+```js 13:38 title="Callbacks" file="../2.1-express-async-patterns/src/routes/1-weatherCallbacks.js"
+```
+
+```diff 16:38 subtitle="callback 'hell'"
+
+```
+
+</CodeSurfer>
+
+---
+
+# Promises & Await
+
+---
+
+<CodeSurferColumns>
+
+<Step >
+
+```js 13:38 title="Callbacks" file="../2.1-express-async-patterns/src/routes/1-weatherCallbacks.js"
+```
+
+```js 13:24 title="Promises" file="../2.1-express-async-patterns/src/routes/2-weatherPromises.js"
+```
+
+</Step>
+
+<Step >
+
+```js 13:24 title="Promises" file="../2.1-express-async-patterns/src/routes/2-weatherPromises.js"
+```
+
+```js 13:26 title="AsyncAwait" file="../2.1-express-async-patterns/src/routes/3-weatherAsyncAwait.js"
+```
+
+</Step>
+
+</CodeSurferColumns>
+
+---
+
+## Fullstack Javascript
+
+---
+
+### Server Side Single Page Applications
+- Node allows for hybrid web applications
+  - Client side SPA's can now be used on the server
+- Initial render is done on the server
+  - HTML markup is sent to the client and rehydrated
+- This method works with any modern framework
+  - React, Angular, Vue, etc.
+
+---
+
+### SSR Architecture 
+- Do not build monolithic SSR applications
+- SSR nodes should be treated as a service
+  - "Render as a service"
+- Decouple your data to its own dedicated API service
+- Data access should always be over http - _even on the server_
+
+---
+
+## SSR Demo
+
+```
+goto "3.0-express-api-server"
+goto "3.1-ssr-react"
+```
+
+---
+
+## Scaling Node
+Clusters & Threading
+
+---
+
+### Clusters
+- A cluster consists of forked node processes
+- The pool of node workers share a single port
+- The main proc distributes load using a round robin approach
+- All applications should be designed to horizontally scale
+
+---
+
+<CodeSurfer>
+
+```js title="cluster example"  file="../4.0-scaling/src/cluster.ts"
+```
+
+</CodeSurfer>
+
+---
+
+### Threading
+- Similar to clusters with a more general API
+- Useful for performing *CPU* intensive operations
+- Do not use for I/O operations
+  - Instead stick with regular Asynchronous patterns
+
+---
+
+<CodeSurfer>
+
+```js title="threading example"  file="../4.0-scaling/src/threading.ts"
+```
+
+</CodeSurfer>
+
+---
+# End

@@ -1,0 +1,8 @@
+POST /todos
+Host: localhost:3000
+Content-Type: application/json
+
+{
+    "name": "Buy Groceries",
+    "description": "Milk; Bread; Eggs;"
+}

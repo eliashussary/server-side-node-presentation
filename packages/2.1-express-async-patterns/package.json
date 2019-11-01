@@ -1,0 +1,21 @@
+{
+  "name": "@campfire/express-async-patterns",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "yarn type-check -- --watch",
+    "build": "yarn build:types && npm run build:js",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline --root-mode upward",
+    "start:dev": "babel-node --root-mode upward --extensions \".ts,.tsx,.js,.jsx\" ./src/index.ts",
+    "start:dev:watch": "nodemon --watch src --ext \".ts,.tsx,.js,.jsx\" --exec yarn start:dev",
+    "start": "yarn start:dev:watch"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "faker": "^4.1.0"
+  }
+}

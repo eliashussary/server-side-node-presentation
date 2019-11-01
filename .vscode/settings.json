@@ -1,0 +1,12 @@
+{
+    "sqltools.connections": [
+        {
+            "database": "./node-campfire/packages/3.0-express-api-server/todo.db",
+            "dialect": "SQLite",
+            "isActive": false,
+            "isConnected": false,
+            "name": "TodoDB"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}

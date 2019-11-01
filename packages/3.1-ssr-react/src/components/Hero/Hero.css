@@ -1,0 +1,38 @@
+.Hero {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.Hero-logo {
+  animation: Hero-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.Hero-header {
+  background-color: #222;
+  height: 150px;
+  padding: 50px;
+  color: white;
+}
+
+.Hero-intro {
+  font-size: large;
+}
+
+.Hero-resources {
+  list-style: none;
+}
+
+.Hero-resources > li {
+  display: inline-block;
+  padding: 1rem;
+}
+
+@keyframes Hero-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

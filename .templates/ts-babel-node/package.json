@@ -1,0 +1,15 @@
+{
+  "name": "babel-typescript-sample",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "yarn type-check -- --watch",
+    "build": "yarn build:types && npm run build:js",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline --root-mode upward",
+    "start:dev": "babel-node --root-mode upward --extensions \".ts,.tsx\" ./src/index.ts",
+    "start:dev:watch": "nodemon --watch src --ext \".ts,.tsx\" --exec yarn start:dev",
+    "start": "yarn start:dev:watch"
+  }
+}
